@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {convertRaitingIntoPercent} from "../../utils";
 
 
-class PlaceCard extends PureComponent {
+class OfferCard extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -76,7 +76,7 @@ class PlaceCard extends PureComponent {
   }
 }
 
-PlaceCard.propTypes = {
+OfferCard.propTypes = {
   onHover: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
@@ -91,4 +91,4 @@ PlaceCard.propTypes = {
 };
 
 
-export default PlaceCard;
+export default OfferCard;
