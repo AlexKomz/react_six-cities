@@ -6,6 +6,7 @@ import App from "./app.jsx";
 
 const offers = [
   {
+    isPremium: false,
     image: {src: `img/apartment-01.jpg`},
     price: {
       value: 120,
@@ -15,6 +16,7 @@ const offers = [
     name: `Beautiful &amp; luxurious apartment at great location`,
     type: `Apartment`
   }, {
+    isPremium: true,
     image: {src: `img/room.jpg`},
     price: {
       value: 80,

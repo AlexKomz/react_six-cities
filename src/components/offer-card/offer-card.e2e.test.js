@@ -8,6 +8,7 @@ import OfferCard from "./offer-card.jsx";
 configure({adapter: new Adapter()});
 
 const offer = {
+  isPremium: false,
   image: {src: `img/apartment-01.jpg`},
   price: {
     value: 120,
@@ -21,6 +22,7 @@ const offer = {
 it(`On hover the mouse over, the event handler gets the correct information`, () => {
   const onHover = jest.fn();
   const hoveredOffer = {
+    isPremium: false,
     image: {src: `img/apartment-01.jpg`},
     price: {
       value: 120,
