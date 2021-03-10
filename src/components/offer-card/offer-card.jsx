@@ -29,7 +29,9 @@ class OfferCard extends PureComponent {
     return (
       <article
         className="cities__place-card place-card"
-        onMouseOver={onHover(this)}
+        onMouseOver={() => {
+          onHover(offer);
+        }}
       >
         {this._hasPremiumMark()}
         <div className="cities__image-wrapper place-card__image-wrapper">
@@ -52,7 +54,11 @@ class OfferCard extends PureComponent {
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
-              <span style={`width: ${convertRaitingIntoPercent(offer.rating)}%`}></span>
+              <span
+                style={{
+                  width: convertRaitingIntoPercent(offer.rating) + `%`
+                }}>
+              </span>
               <span className="visually-hidden">Rating</span>
             </div>
           </div>
@@ -84,7 +90,7 @@ OfferCard.propTypes = {
       value: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
     }).isRequired,
-    rating: PropTypes.number.isRequired,
+    rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
