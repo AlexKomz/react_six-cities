@@ -10,7 +10,6 @@ class OfferCard extends PureComponent {
     super(props);
 
     this.state = {
-      isPremium: false,
       inBookmarks: false,
     };
   }
@@ -73,7 +72,8 @@ class OfferCard extends PureComponent {
   }
 
   _hasPremiumMark() {
-    const {isPremium} = this.state;
+    const {offer} = this.props;
+    const {isPremium} = offer;
 
     return isPremium ? (
       <div className="place-card__mark">
@@ -86,6 +86,7 @@ class OfferCard extends PureComponent {
 OfferCard.propTypes = {
   onHover: PropTypes.func.isRequired,
   offer: PropTypes.shape({
+    isPremium: PropTypes.bool.isRequired,
     image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
     price: PropTypes.shape({
       value: PropTypes.number.isRequired,
