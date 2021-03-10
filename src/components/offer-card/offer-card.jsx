@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import {convertRaitingIntoPercent} from "../../utils";
 
@@ -20,11 +21,11 @@ class OfferCard extends PureComponent {
 
     const {image, price} = offer;
 
-    const boormarkBtnClasses = [
-      `place-card__bookmark-button`,
-      `${inBookmarks ? `place-card__bookmark-button--active` : ``}`,
-      `button`
-    ];
+    const boormarkBtnClasses = classNames({
+      "place-card__bookmark-button": true,
+      "place-card__bookmark-button--active": inBookmarks,
+      "button": true
+    });
 
     return (
       <article
@@ -45,7 +46,7 @@ class OfferCard extends PureComponent {
               <b className="place-card__price-value">&euro;{price.value}</b>
               <span className="place-card__price-text">&#47;&nbsp;{price.text}</span>
             </div>
-            <button className={boormarkBtnClasses.join(` `)} type="button">
+            <button className={boormarkBtnClasses} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
