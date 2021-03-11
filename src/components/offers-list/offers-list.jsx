@@ -20,7 +20,7 @@ class OffersList extends PureComponent {
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer, i) => (
           <OfferCard
-            key={`${offer.name}_${i}`}
+            key={`${offer.name}-${i}`}
             offer={offer}
             onHover={(current) => {
               this.setState({
