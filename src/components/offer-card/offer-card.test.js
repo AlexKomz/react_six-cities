@@ -5,6 +5,7 @@ import OfferCard from "./offer-card.jsx";
 
 
 const offer = {
+  id: `id1`,
   isPremium: false,
   image: {src: `img/apartment-01.jpg`},
   price: {
