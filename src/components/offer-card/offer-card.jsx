@@ -86,6 +86,7 @@ class OfferCard extends PureComponent {
 OfferCard.propTypes = {
   onHover: PropTypes.func.isRequired,
   offer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
     price: PropTypes.shape({
