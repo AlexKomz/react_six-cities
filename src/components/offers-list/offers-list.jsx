@@ -18,19 +18,17 @@ class OffersList extends PureComponent {
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer, i) => {
-          return (
-            <OfferCard
-              key={`${offer.name}_${i}`}
-              offer={offer}
-              onHover={(current) => {
-                this.setState({
-                  currentOffer: current,
-                });
-              }}
-            />
-          );
-        })}
+        {offers.map((offer, i) => (
+          <OfferCard
+            key={`${offer.name}_${i}`}
+            offer={offer}
+            onHover={(current) => {
+              this.setState({
+                currentOffer: current,
+              });
+            }}
+          />
+        ))}
       </div>
     );
   }
