@@ -16,7 +16,7 @@ class OfferCard extends PureComponent {
 
   render() {
     const {onHover, offer} = this.props;
-    const {inBookmarks} = this.state;
+    const {isPremium, inBookmarks} = this.state;
 
     const {image, price} = offer;
 
@@ -33,7 +33,11 @@ class OfferCard extends PureComponent {
           onHover(offer);
         }}
       >
-        {this._hasPremiumMark()}
+        {isPremium ? (
+          <div className="place-card__mark">
+            <span>Premium</span>
+          </div>
+        ) : null}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
             <img className="place-card__image" src={image.src} width="260" height="200" alt="Place image"/>
@@ -69,17 +73,6 @@ class OfferCard extends PureComponent {
         </div>
       </article>
     );
-  }
-
-  _hasPremiumMark() {
-    const {offer} = this.props;
-    const {isPremium} = offer;
-
-    return isPremium ? (
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-    ) : null;
   }
 }
 
