@@ -17,8 +17,16 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
+    this._mapInit();
+  }
+
+  componentWillUnmount() {
+    this._map.remove();
+  }
+
+  _mapInit() {
     if (!this._mapRef.current) {
-      return false;
+      return;
     }
 
     const {city, coords} = this.props;
@@ -50,12 +58,6 @@ export default class Map extends PureComponent {
         .marker(coord, {icon})
         .addTo(this._map);
     });
-
-    return true;
-  }
-
-  componentWillUnmount() {
-    this._map.remove();
   }
 }
 
