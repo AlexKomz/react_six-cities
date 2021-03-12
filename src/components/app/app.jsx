@@ -97,7 +97,10 @@ const App = (props) => {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  {<Map />}
+                  {<Map
+                    city={[52.38333, 4.9]}
+                    coords={offers.map((offer) => offer.coords)}
+                  />}
                 </section>
               </div>
             </div>

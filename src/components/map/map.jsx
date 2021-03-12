@@ -1,5 +1,5 @@
 import React, {PureComponent, createRef} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
 
@@ -17,7 +17,7 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const city = [52.38333, 4.9];
+    const {city, coords} = this.props;
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -41,11 +41,11 @@ export default class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    const offerCords = [52.3709553943508, 4.89309666406198];
-
-    leaflet
-      .marker(offerCords, {icon})
-      .addTo(this._map);
+    coords.forEach((coord) => {
+      leaflet
+        .marker(coord, {icon})
+        .addTo(this._map);
+    });
   }
 
   componentWillUnmount() {
@@ -53,4 +53,7 @@ export default class Map extends PureComponent {
   }
 }
 
-Map.propTypes = {};
+Map.propTypes = {
+  city: PropTypes.array.isRequired,
+  coords: PropTypes.arrayOf(PropTypes.array).isRequired
+};
