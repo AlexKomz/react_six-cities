@@ -17,6 +17,10 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
+    if (!this._mapRef.current) {
+      return false;
+    }
+
     const {city, coords} = this.props;
 
     const icon = leaflet.icon({
@@ -46,6 +50,8 @@ export default class Map extends PureComponent {
         .marker(coord, {icon})
         .addTo(this._map);
     });
+
+    return true;
   }
 
   componentWillUnmount() {
