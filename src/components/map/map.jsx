@@ -2,6 +2,8 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
+import {ZOOM, Icon} from "../../consts.js";
+
 
 export default class Map extends PureComponent {
   constructor(props) {
@@ -32,20 +34,18 @@ export default class Map extends PureComponent {
     const {city, coords} = this.props;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconUrl: Icon.ICONURL,
+      iconSize: Icon.ICONSIZE,
     });
-
-    const zoom = 12;
 
     this._map = leaflet.map(this._mapRef.current, {
       center: city,
-      zoom,
+      zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, zoom);
+    this._map.setView(city, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
