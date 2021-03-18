@@ -15,9 +15,12 @@ export default class OfferCard extends PureComponent {
   }
 
   render() {
-    const {onHover, offer} = this.props;
+    const {
+      offer,
+      onMouseEnter,
+      onMouseLeave,
+    } = this.props;
     const {inBookmarks} = this.state;
-
     const {
       isPremium,
       image,
@@ -26,7 +29,6 @@ export default class OfferCard extends PureComponent {
       name,
       type
     } = offer;
-
     const boormarkBtnClasses = classNames({
       "place-card__bookmark-button": true,
       "place-card__bookmark-button--active": inBookmarks,
@@ -36,9 +38,10 @@ export default class OfferCard extends PureComponent {
     return (
       <article
         className="cities__place-card place-card"
-        onMouseOver={() => {
-          onHover(offer);
+        onMouseEnter={() => {
+          onMouseEnter(offer);
         }}
+        onMouseLeave={onMouseLeave}
       >
         {isPremium && (
           <div className="place-card__mark">
@@ -84,9 +87,14 @@ export default class OfferCard extends PureComponent {
 }
 
 OfferCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.array.isRequired,
+    }).isRequired,
     isPremium: PropTypes.bool.isRequired,
     image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
     price: PropTypes.shape({
@@ -96,5 +104,6 @@ OfferCard.propTypes = {
     rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    coords: PropTypes.array.isRequired,
   }).isRequired,
 };
