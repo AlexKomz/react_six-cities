@@ -5,6 +5,7 @@ export const Raiting = {
 export const ZOOM = 12;
 
 export const Icon = {
-  ICONURL: `img/pin.svg`,
-  ICONSIZE: [30, 30],
+  ICON_URL: `img/pin.svg`,
+  ACTIVE_ICON_URL: `img/pin-active.svg`,
+  ICON_SIZE: [30, 30],
 };
