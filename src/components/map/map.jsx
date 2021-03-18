@@ -10,9 +10,21 @@ export default class Map extends PureComponent {
     super(props);
 
     this._mapRef = createRef();
+
+    this._icon = leaflet.icon({
+      iconUrl: Icon.ICON_URL,
+      iconSize: Icon.ICON_SIZE,
+    });
+
+    this._activeIcon = leaflet.icon({
+      iconUrl: Icon.ACTIVE_ICON_URL,
+      iconSize: Icon.ICON_SIZE,
+    });
   }
 
   render() {
+    this._mapInit();
+
     return (
       <div id="map" ref={this._mapRef} style={{height: `100%`}} />
     );
@@ -31,21 +43,22 @@ export default class Map extends PureComponent {
       return;
     }
 
-    const {city, coords} = this.props;
+    if (this._map) {
+      this._map.remove();
+    }
 
-    const icon = leaflet.icon({
-      iconUrl: Icon.ICONURL,
-      iconSize: Icon.ICONSIZE,
-    });
+    const {offers, currentOffer} = this.props;
+    const currentId = currentOffer ? currentOffer.id : null;
+    const cityCoords = offers[0].city.coords;
 
     this._map = leaflet.map(this._mapRef.current, {
-      center: city,
+      center: cityCoords,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, ZOOM);
+    this._map.setView(cityCoords, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -53,15 +66,33 @@ export default class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    coords.forEach((coord) => {
+    offers.forEach((offer) => {
+      let iconContainer = currentId === offer.id ? this._activeIcon : this._icon;
+
       leaflet
-        .marker(coord, {icon})
+        .marker(offer.coords, {icon: iconContainer})
         .addTo(this._map);
     });
   }
 }
 
 Map.propTypes = {
-  city: PropTypes.array.isRequired,
-  coords: PropTypes.arrayOf(PropTypes.array).isRequired
+  offers: PropTypes.array.isRequired,
+  currentOffer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      coords: PropTypes.array.isRequired,
+    }).isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
+    price: PropTypes.shape({
+      value: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+    }).isRequired,
+    rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    coords: PropTypes.array.isRequired,
+  }),
 };
