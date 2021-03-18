@@ -4,37 +4,48 @@ import renderer from "react-test-renderer";
 import OffersList from "./offers-list.jsx";
 
 
-const offers = [
-  {
-    id: `id1`,
-    isPremium: false,
-    image: {src: `img/apartment-01.jpg`},
-    price: {
-      value: 120,
-      text: `night`
-    },
-    rating: 4,
-    name: `Beautiful &amp; luxurious apartment at great location`,
-    type: `Apartment`
-  }, {
-    id: `id2`,
-    isPremium: true,
-    image: {src: `img/room.jpg`},
-    price: {
-      value: 80,
-      text: `night`
-    },
-    rating: 4,
-    name: `Wood and stone place`,
-    type: `Private room`
-  }
-];
+const offers = [{
+  id: `id1`,
+  city: {
+    name: `Amsterdam`,
+    coords: [52.38333, 4.9],
+  },
+  isPremium: true,
+  image: {src: `img/apartment-01.jpg`},
+  price: {
+    value: 120,
+    text: `night`
+  },
+  rating: 4,
+  name: `Beautiful &amp; luxurious apartment at great location`,
+  type: `Apartment`,
+  coords: [52.3909553943508, 4.85309666406198]
+}, {
+  id: `id2`,
+  city: {
+    name: `Amsterdam`,
+    coords: [52.38333, 4.9],
+  },
+  isPremium: false,
+  image: {src: `img/room.jpg`},
+  price: {
+    value: 80,
+    text: `night`
+  },
+  rating: 4,
+  name: `Wood and stone place`,
+  type: `Private room`,
+  coords: [52.369553943508, 4.85309666406198]
+}];
 
 it(`Should OffersList render correctly`, () => {
   const tree = renderer
     .create(
         <OffersList
+          city={`Amsterdam`}
           offers={offers}
+          onMouseEnter={jest.fn()}
+          onMouseLeave={jest.fn()}
         />
     ).toJSON();
 
