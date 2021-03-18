@@ -1,6 +1,10 @@
 export default [
   {
     id: `id1`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.38333, 4.9],
+    },
     isPremium: true,
     image: {src: `img/apartment-01.jpg`},
     price: {
@@ -13,6 +17,10 @@ export default [
     coords: [52.3909553943508, 4.85309666406198]
   }, {
     id: `id2`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.38333, 4.9],
+    },
     isPremium: false,
     image: {src: `img/room.jpg`},
     price: {
@@ -25,6 +33,10 @@ export default [
     coords: [52.369553943508, 4.85309666406198]
   }, {
     id: `id3`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.38333, 4.9],
+    },
     isPremium: false,
     image: {src: `img/apartment-02.jpg`},
     price: {
@@ -37,6 +49,10 @@ export default [
     coords: [52.3909553943508, 4.929309666406198]
   }, {
     id: `id4`,
+    city: {
+      name: `Amsterdam`,
+      coords: [52.38333, 4.9],
+    },
     isPremium: true,
     image: {src: `img/apartment-03.jpg`},
     price: {
