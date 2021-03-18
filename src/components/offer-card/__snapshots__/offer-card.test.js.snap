@@ -3,8 +3,16 @@
 exports[`Should OfferCard render correctly 1`] = `
 <article
   className="cities__place-card place-card"
-  onMouseOver={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[MockFunction]}
 >
+  <div
+    className="place-card__mark"
+  >
+    <span>
+      Premium
+    </span>
+  </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
