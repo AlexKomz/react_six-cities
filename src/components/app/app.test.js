@@ -3,7 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 
-import App, {App as AppWithoutStore} from "./app.jsx";
+import App from "./app.jsx";
+
+import {SortType} from "../../consts.js";
 
 
 const mockStore = configureStore([]);
@@ -76,22 +78,10 @@ const offers = [{
 
 
 describe(`Render App`, () => {
-  it(`Should App render correctly without store`, () => {
-    const tree = renderer
-      .create(
-          <AppWithoutStore
-            city={`Amsterdam`}
-            offers={offers}
-            onTabClick={jest.fn()}
-          />
-      ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
   it(`Should App render correctly with store`, () => {
     const store = mockStore({
       city: `Amsterdam`,
+      sortType: SortType.POPULAR,
       offers,
     });
 
