@@ -14,23 +14,29 @@ const LocationList = ({activeCity, offers, onTabClick}) => {
   }, []);
 
   return (
-    <ul className="locations__list tabs__list">
-      {cities.map((city, i) => (
-        <li
-          key={`${city}-${i}`}
-          className="locations__item">
-          <a
-            className={`locations__item-link tabs__item ${city === activeCity ? `tabs__item--active` : ``}`}
-            href="#"
-            onClick={() => {
-              onTabClick(city);
-            }}
-          >
-            <span>{city}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <section className="locations container">
+      <ul className="locations__list tabs__list">
+        {cities.map((city, i) => (
+          <li
+            key={`${city}-${i}`}
+            className="locations__item">
+            <a
+              className={`locations__item-link tabs__item ${city === activeCity ? `tabs__item--active` : ``}`}
+              href="#"
+              onClick={() => {
+                if (city === activeCity) {
+                  return;
+                }
+
+                onTabClick(city);
+              }}
+            >
+              <span>{city}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 
