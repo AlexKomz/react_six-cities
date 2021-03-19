@@ -9,3 +9,10 @@ export const Icon = {
   ACTIVE_ICON_URL: `img/pin-active.svg`,
   ICON_SIZE: [30, 30],
 };
+
+export const SortType = {
+  POPULAR: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED_FIRST: `Top rated first`,
+};
