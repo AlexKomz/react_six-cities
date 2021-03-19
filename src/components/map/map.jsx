@@ -26,7 +26,9 @@ export default class Map extends PureComponent {
     this._mapInit();
 
     return (
-      <div id="map" ref={this._mapRef} style={{height: `100%`}} />
+      <section className="cities__map map">
+        <div id="map" ref={this._mapRef} style={{height: `100%`}} />
+      </section>
     );
   }
 
