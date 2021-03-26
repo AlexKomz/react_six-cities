@@ -2,7 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-const LocationList = ({activeCity, offers, onTabClick}) => {
+const LocationList = (props) => {
+  const {
+    activeCity,
+    offers,
+    onTabClick
+  } = props;
+
   const cities = offers.reduce((acc, offer) => {
     const city = offer.city.name;
 

@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 
-const OffersList = ({
-  offers,
-  onMouseEnter,
-  onMouseLeave
-}) => {
+const OffersList = (props) => {
+  const {
+    offers,
+    onMouseEnter,
+    onMouseLeave
+  } = props;
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (

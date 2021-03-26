@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 import {SortType} from "../../consts";
 
 
-const Sort = ({
-  isSortFormOpened,
-  onSortLabelClick,
-  sortType,
-  onSortOptionClick
-}) => {
+const Sort = (props) => {
+  const {
+    isSortFormOpened,
+    onSortLabelClick,
+    sortType,
+    onSortOptionClick
+  } = props;
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>

@@ -8,8 +8,15 @@ import Cities from "../cities/cities.jsx";
 import {ActionCreator} from "../../reducer.js";
 
 
-export const App = ({city, offers, onTabClick}) => (
-  <div className="page page--gray page--main">
+export const App = (props) => {
+  const {
+    city,
+    offers,
+    onTabClick
+  } = props;
+
+  return (
+    <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
@@ -46,8 +53,9 @@ export const App = ({city, offers, onTabClick}) => (
         offers={offers}
       />}
     </main>
-  </div>
-);
+  </div>;
+  );
+};
 
 App.propTypes = {
   city: PropTypes.string.isRequired,
