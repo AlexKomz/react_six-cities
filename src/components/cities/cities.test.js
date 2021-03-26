@@ -58,6 +58,9 @@ it(`Should Cities render correctly`, () => {
           <Cities
             city={city}
             offers={offers}
+            currentOffer={null}
+            onMouseEnter={() => {}}
+            onMouseLeave={() => {}}
           />
         </Provider>
     ).toJSON();

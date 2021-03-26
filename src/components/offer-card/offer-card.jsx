@@ -5,7 +5,7 @@ import classNames from "classnames";
 import {convertRaitingIntoPercent} from "../../utils";
 
 
-export default class OfferCard extends PureComponent {
+class OfferCard extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -107,3 +107,6 @@ OfferCard.propTypes = {
     coords: PropTypes.array.isRequired,
   }).isRequired,
 };
+
+
+export default OfferCard;

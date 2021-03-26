@@ -5,8 +5,12 @@ import {connect} from "react-redux";
 import LocationList from "../locations-list/locations-list.jsx";
 import Cities from "../cities/cities.jsx";
 
+import withHoverOffer from "../../hocs/with-hover-offer/with-hover-offer.js";
+
 import {ActionCreator} from "../../reducer.js";
 
+
+const CitiesWrapped = withHoverOffer(Cities);
 
 export const App = (props) => {
   const {
@@ -48,7 +52,7 @@ export const App = (props) => {
             onTabClick={onTabClick}
           />}
         </div>
-        {<Cities
+        {<CitiesWrapped
           city={city}
           offers={offers}
         />}
