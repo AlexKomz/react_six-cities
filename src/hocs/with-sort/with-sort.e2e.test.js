@@ -9,7 +9,6 @@ import {SortType} from "../../consts.js";
 
 configure({adapter: new Adapter()});
 
-
 const MockComponent = () => <div />;
 const MockComponentWrapped = withSort(MockComponent);
 
