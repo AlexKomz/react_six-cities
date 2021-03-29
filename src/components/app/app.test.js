@@ -76,24 +76,21 @@ const offers = [{
   coords: [52.3809553943508, 4.939309666406198]
 }];
 
-
-describe(`Render App`, () => {
-  it(`Should App render correctly with store`, () => {
-    const store = mockStore({
-      city: `Amsterdam`,
-      sortType: SortType.POPULAR,
-      offers,
-    });
-
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <App
-              onTabClick={jest.fn()}
-            />
-          </Provider>
-      ).toJSON();
-
-    expect(tree).toMatchSnapshot();
+it(`Should App render correctly with store`, () => {
+  const store = mockStore({
+    city: `Amsterdam`,
+    sortType: SortType.POPULAR,
+    offers,
   });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            onTabClick={jest.fn()}
+          />
+        </Provider>
+    ).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

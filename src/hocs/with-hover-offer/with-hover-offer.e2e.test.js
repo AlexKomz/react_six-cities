@@ -4,6 +4,8 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 import withHoverOffer from "./with-hover-offer.js";
 
+import {SortType} from "../../consts.js";
+
 
 configure({adapter: new Adapter()});
 
@@ -68,6 +70,8 @@ it(`On hover the mouse over, the event handler gets the correct information`, ()
       <MockComponentWrapped
         city={city}
         offers={offers}
+        sortType={SortType.POPULAR}
+        onSortOptionClick={jest.fn()}
       />);
 
   wrapper.props().onMouseEnter(hoveredOffer);

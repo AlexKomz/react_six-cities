@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 
+import {SortType} from "../../consts.js";
+
 
 const withHoverOffer = (Component) => {
   class WithHoverOffer extends PureComponent {
@@ -44,6 +46,8 @@ const withHoverOffer = (Component) => {
   WithHoverOffer.propTypes = {
     city: PropTypes.string.isRequired,
     offers: PropTypes.array.isRequired,
+    sortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
+    onSortOptionClick: PropTypes.func.isRequired,
   };
 
   return WithHoverOffer;

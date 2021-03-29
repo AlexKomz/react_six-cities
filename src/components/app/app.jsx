@@ -8,6 +8,7 @@ import Cities from "../cities/cities.jsx";
 import withHoverOffer from "../../hocs/with-hover-offer/with-hover-offer.js";
 
 import {ActionCreator} from "../../reducer.js";
+import {SortType} from "../../consts.js";
 
 
 const CitiesWrapped = withHoverOffer(Cities);
@@ -16,7 +17,9 @@ export const App = (props) => {
   const {
     city,
     offers,
-    onTabClick
+    onTabClick,
+    sortType,
+    onSortOptionClick,
   } = props;
 
   return (
@@ -55,6 +58,8 @@ export const App = (props) => {
         {<CitiesWrapped
           city={city}
           offers={offers}
+          sortType={sortType}
+          onSortOptionClick={onSortOptionClick}
         />}
       </main>
     </div>
@@ -65,16 +70,22 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
   onTabClick: PropTypes.func.isRequired,
+  sortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
+  onSortOptionClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: state.offers,
+  sortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (city) => {
     dispatch(ActionCreator.changeCity(city));
+  },
+  onSortOptionClick: (sortType) => {
+    dispatch(ActionCreator.changeSortType(sortType));
   },
 });
 

@@ -1,14 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 
 import Cities from "../cities/cities.jsx";
 
 import {SortType} from "../../consts.js";
 
-
-const mockStore = configureStore([]);
 
 const city = `Amsterdam`;
 const offers = [{
@@ -46,23 +42,17 @@ const offers = [{
 }];
 
 it(`Should Cities render correctly`, () => {
-  const store = mockStore({
-    city: `Amsterdam`,
-    sortType: SortType.POPULAR,
-    offers,
-  });
-
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <Cities
-            city={city}
-            offers={offers}
-            currentOffer={null}
-            onMouseEnter={() => {}}
-            onMouseLeave={() => {}}
-          />
-        </Provider>
+        <Cities
+          city={city}
+          offers={offers}
+          currentOffer={null}
+          onMouseEnter={() => {}}
+          onMouseLeave={() => {}}
+          sortType={SortType.POPULAR}
+          onSortOptionClick={jest.fn()}
+        />
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

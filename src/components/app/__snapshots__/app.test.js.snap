@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App Should App render correctly with store 1`] = `
+exports[`Should App render correctly with store 1`] = `
 <div
   className="page page--gray page--main"
 >
