@@ -4,8 +4,12 @@ import PropTypes from "prop-types";
 import Places from "../places/places.jsx";
 import Map from "../map/map.jsx";
 
+import withSort from "../../hocs/with-sort/with-sort.js";
+
 import {filteringOffersByCity} from "../../utils.js";
 
+
+const PlacesWrapped = withSort(Places);
 
 const Cities = (props) => {
   const {
@@ -22,7 +26,7 @@ const Cities = (props) => {
   return (
     <div className="cities">
       <div className="cities__places-container container">
-        <Places
+        <PlacesWrapped
           offersCount={offersCount}
           city={city}
           offers={filteredOffers}
