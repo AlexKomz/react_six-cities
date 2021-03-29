@@ -1,14 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 
-import Places, {Places as PlacesWithoutStore} from "../places/places.jsx";
+import Places from "../places/places.jsx";
 
 import {SortType} from "../../consts.js";
 
-
-const mockStore = configureStore([]);
 
 const city = `London`;
 const offers = [{
@@ -77,44 +73,21 @@ const offers = [{
   coords: [52.3809553943508, 4.939309666406198]
 }];
 
-describe(`Render Places`, () => {
-  it(`Should Places render correctly without store`, () => {
-    const tree = renderer
-      .create(
-          <PlacesWithoutStore
-            offersCount={offers.length}
-            city={city}
-            offers={offers}
-            onMouseEnter={jest.fn()}
-            onMouseLeave={jest.fn()}
-            sortType={SortType.POPULAR}
-            onSortOptionClick={jest.fn()}
-          />
-      ).toJSON();
+it(`Should Places render correctly`, () => {
+  const tree = renderer
+    .create(
+        <Places
+          offersCount={offers.length}
+          city={city}
+          onMouseEnter={jest.fn()}
+          onMouseLeave={jest.fn()}
+          sortType={SortType.POPULAR}
+          onSortOptionClick={jest.fn()}
+          isSortFormOpened={false}
+          offers={offers}
+          onSortLabelClick={jest.fn()}
+        />
+    ).toJSON();
 
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Should Places render correctly with store`, () => {
-    const store = mockStore({
-      city: `Amsterdam`,
-      sortType: SortType.POPULAR,
-      offers,
-    });
-
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <Places
-              offersCount={offers.length}
-              city={city}
-              offers={offers}
-              onMouseEnter={jest.fn()}
-              onMouseLeave={jest.fn()}
-            />
-          </Provider>
-      ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
+  expect(tree).toMatchSnapshot();
 });
