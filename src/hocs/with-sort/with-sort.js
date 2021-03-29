@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 
-import {ActionCreator} from "../../reducer.js";
 import {SortType} from "../../consts.js";
 import {sortingOffers} from "../../utils";
 
@@ -54,17 +52,7 @@ const withSort = (Component) => {
     onSortOptionClick: PropTypes.func.isRequired,
   };
 
-  const mapStateToProps = (state) => ({
-    sortType: state.sortType,
-  });
-
-  const mapDispatchToProps = (dispatch) => ({
-    onSortOptionClick: (sortType) => {
-      dispatch(ActionCreator.changeSortType(sortType));
-    },
-  });
-
-  return connect(mapStateToProps, mapDispatchToProps)(WithSort);
+  return WithSort;
 };
 
 export default withSort;
