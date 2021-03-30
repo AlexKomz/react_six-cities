@@ -6,7 +6,6 @@ import Map from "../map/map.jsx";
 
 import withSort from "../../hocs/with-sort/with-sort.js";
 
-import {filteringOffersByCity} from "../../utils.js";
 import {SortType} from "../../consts.js";
 
 
@@ -23,8 +22,7 @@ const Cities = (props) => {
     onSortOptionClick,
   } = props;
 
-  const filteredOffers = filteringOffersByCity(offers, city);
-  const offersCount = filteredOffers.length;
+  const offersCount = offers.length;
 
   return (
     <div className="cities">
@@ -32,7 +30,7 @@ const Cities = (props) => {
         <PlacesWrapped
           offersCount={offersCount}
           city={city}
-          offers={filteredOffers}
+          offers={offers}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           sortType={sortType}
@@ -40,7 +38,7 @@ const Cities = (props) => {
         />
         <div className="cities__right-section">
           {<Map
-            offers={filteredOffers}
+            offers={offers}
             currentOffer={currentOffer}
           />}
         </div>
