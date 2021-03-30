@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import LocationList from "../locations-list/locations-list.jsx";
+import LocationTabsList from "./locations-tabs-list.jsx";
 
 
 const city = `Amsterdam`;
@@ -42,7 +42,7 @@ const offers = [{
 it(`Should LocationList render correctly`, () => {
   const tree = renderer
     .create(
-        <LocationList
+        <LocationTabsList
           activeCity={city}
           offers={offers}
           onTabClick={jest.fn()}
