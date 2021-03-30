@@ -20,7 +20,9 @@ class OfferCard extends PureComponent {
       onMouseEnter,
       onMouseLeave,
     } = this.props;
+
     const {inBookmarks} = this.state;
+
     const {
       isPremium,
       image,
@@ -29,6 +31,7 @@ class OfferCard extends PureComponent {
       name,
       type
     } = offer;
+
     const boormarkBtnClasses = classNames({
       "place-card__bookmark-button": true,
       "place-card__bookmark-button--active": inBookmarks,
