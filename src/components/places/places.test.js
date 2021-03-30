@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Places from "../places/places.jsx";
+import Places from "./places.jsx";
 
 import {SortType} from "../../consts.js";
 
