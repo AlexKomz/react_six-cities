@@ -16,3 +16,12 @@ export const SortType = {
   HIGH_TO_LOW: `Price: high to low`,
   TOP_RATED_FIRST: `Top rated first`,
 };
+
+export const Cities = {
+  PARIS: `Paris`,
+  COLOGNE: `Cologne`,
+  BRUSSELS: `Brussels`,
+  AMSTERDAM: `Amsterdam`,
+  HAMBURF: `Hamburg`,
+  DUSSELDORF: `Dusseldorf`,
+};
