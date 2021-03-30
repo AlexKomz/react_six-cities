@@ -9,6 +9,7 @@ export default class Map extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._map = null;
     this._mapRef = createRef();
 
     this._icon = leaflet.icon({
@@ -38,6 +39,7 @@ export default class Map extends PureComponent {
 
   componentWillUnmount() {
     this._map.remove();
+    this._map = null;
   }
 
   _mapInit() {
@@ -47,9 +49,15 @@ export default class Map extends PureComponent {
 
     if (this._map) {
       this._map.remove();
+      this._map = null;
     }
 
     const {offers, currentOffer} = this.props;
+
+    if (offers.length === 0) {
+      return;
+    }
+
     const currentId = currentOffer ? currentOffer.id : null;
     const cityCoords = offers[0].city.coords;
 
