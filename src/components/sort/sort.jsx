@@ -27,7 +27,13 @@ const Sort = (props) => {
         {Object.values(SortType).map((type, i) => (
           <li
             key={`${type}-${i}`}
-            className={`places__option ${sortType === type ? `places__option--active` : ``}`}
+            className={
+              `places__option ${
+                sortType === type
+                  ? `places__option--active`
+                  : ``
+              }`
+            }
             onClick={() => {
               if (sortType === type) {
                 return;
