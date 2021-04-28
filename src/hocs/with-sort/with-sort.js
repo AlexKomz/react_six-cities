@@ -2,7 +2,8 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {getSortedOffers} from "../../reducer/main/selectors.js";
+import {ActionCreator} from "../../reducer/main/main.js";
+import {getSortType, getSortedOffers} from "../../reducer/main/selectors.js";
 import {SortType} from "../../consts.js";
 
 
@@ -50,10 +51,17 @@ const withSort = (Component) => {
   };
 
   const mapStateToProps = (state) => ({
+    sortType: getSortType(state),
     offers: getSortedOffers(state),
   });
 
-  return connect(mapStateToProps)(WithSort);
+  const mapDispatchToProps = (dispatch) => ({
+    onSortOptionClick: (sortType) => {
+      dispatch(ActionCreator.changeSortType(sortType));
+    },
+  });
+
+  return connect(mapStateToProps, mapDispatchToProps)(WithSort);
 };
 
 

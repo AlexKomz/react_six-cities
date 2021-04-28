@@ -10,8 +10,7 @@ import Cities from "../cities/cities.jsx";
 import withHoverOffer from "../../hocs/with-hover-offer/with-hover-offer.js";
 
 import {ActionCreator} from "../../reducer/main/main.js";
-import {getCity, getSortType, getFilteredOffers} from "../../reducer/main/selectors.js";
-import {SortType} from "../../consts.js";
+import {getCity, getFilteredOffers} from "../../reducer/main/selectors.js";
 
 
 const CitiesWrapped = withHoverOffer(Cities);
@@ -52,8 +51,6 @@ class App extends PureComponent {
       city,
       onTabClick,
       offers,
-      sortType,
-      onSortOptionClick,
     } = this.props;
 
     const offersCount = offers.length;
@@ -62,8 +59,6 @@ class App extends PureComponent {
       <CitiesWrapped
         city={city}
         offers={offers}
-        sortType={sortType}
-        onSortOptionClick={onSortOptionClick}
       />
     );
 
@@ -98,22 +93,16 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
   onTabClick: PropTypes.func.isRequired,
-  sortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  onSortOptionClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: getCity(state),
   offers: getFilteredOffers(state),
-  sortType: getSortType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTabClick: (city) => {
     dispatch(ActionCreator.changeCity(city));
-  },
-  onSortOptionClick: (sortType) => {
-    dispatch(ActionCreator.changeSortType(sortType));
   },
 });
 

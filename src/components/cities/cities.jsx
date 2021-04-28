@@ -6,8 +6,6 @@ import Map from "../map/map.jsx";
 
 import withSort from "../../hocs/with-sort/with-sort.js";
 
-import {SortType} from "../../consts.js";
-
 
 const PlacesWrapped = withSort(Places);
 
@@ -18,8 +16,6 @@ const Cities = (props) => {
     currentOffer,
     onMouseEnter,
     onMouseLeave,
-    sortType,
-    onSortOptionClick,
   } = props;
 
   const offersCount = offers.length;
@@ -32,8 +28,6 @@ const Cities = (props) => {
           city={city}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          sortType={sortType}
-          onSortOptionClick={onSortOptionClick}
         />
         <div className="cities__right-section">
           {<Map
@@ -49,8 +43,6 @@ const Cities = (props) => {
 Cities.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
-  sortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
-  onSortOptionClick: PropTypes.func.isRequired,
   currentOffer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     city: PropTypes.shape({
