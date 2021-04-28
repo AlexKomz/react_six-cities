@@ -1,8 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
+import {getSortedOffers} from "../../reducer/main/selectors.js";
 import {SortType} from "../../consts.js";
-import {sortingOffers} from "../../utils";
 
 
 const withSort = (Component) => {
@@ -18,18 +19,14 @@ const withSort = (Component) => {
     }
 
     render() {
-      const {
-        offers,
-        sortType,
-      } = this.props;
+      const {offers} = this.props;
       const {isSortFormOpened} = this.state;
-      const sortedOffers = sortingOffers(offers, sortType);
 
       return (
         <Component
           {...this.props}
           isSortFormOpened={isSortFormOpened}
-          offers={sortedOffers}
+          offers={offers}
           onSortLabelClick={this._sortLabelClickHandler}
         />
       );
@@ -52,7 +49,12 @@ const withSort = (Component) => {
     onSortOptionClick: PropTypes.func.isRequired,
   };
 
-  return WithSort;
+  const mapStateToProps = (state) => ({
+    offers: getSortedOffers(state),
+  });
+
+  return connect(mapStateToProps)(WithSort);
 };
+
 
 export default withSort;
