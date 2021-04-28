@@ -9,14 +9,14 @@ import Cities from "../cities/cities.jsx";
 
 import withHoverOffer from "../../hocs/with-hover-offer/with-hover-offer.js";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/main/main.js";
+import {getCity, getSortType, getFilteredOffers} from "../../reducer/main/selectors.js";
 import {SortType} from "../../consts.js";
-import {filteringOffersByCity} from "../../utils.js";
 
 
 const CitiesWrapped = withHoverOffer(Cities);
 
-export class App extends PureComponent {
+class App extends PureComponent {
   render() {
     return (
       <div className="page page--gray page--main">
@@ -56,13 +56,12 @@ export class App extends PureComponent {
       onSortOptionClick,
     } = this.props;
 
-    const filteredOffers = filteringOffersByCity(offers, city);
-    const offersCount = filteredOffers.length;
+    const offersCount = offers.length;
 
     let component = (
       <CitiesWrapped
         city={city}
-        offers={filteredOffers}
+        offers={offers}
         sortType={sortType}
         onSortOptionClick={onSortOptionClick}
       />
@@ -104,9 +103,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
-  sortType: state.sortType,
+  city: getCity(state),
+  offers: getFilteredOffers(state),
+  sortType: getSortType(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -119,4 +118,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
+export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);
