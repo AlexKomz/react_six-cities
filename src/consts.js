@@ -17,7 +17,7 @@ export const SortType = {
   TOP_RATED_FIRST: `Top rated first`,
 };
 
-export const Cities = {
+export const City = {
   PARIS: `Paris`,
   COLOGNE: `Cologne`,
   BRUSSELS: `Brussels`,
