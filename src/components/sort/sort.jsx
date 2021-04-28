@@ -35,11 +35,10 @@ const Sort = (props) => {
               }`
             }
             onClick={() => {
-              if (sortType === type) {
-                return;
+              if (sortType !== type) {
+                onSortOptionClick(type);
               }
 
-              onSortOptionClick(type);
               onSortLabelClick();
             }}
             tabIndex={0}
