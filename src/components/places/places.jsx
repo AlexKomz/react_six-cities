@@ -31,7 +31,6 @@ const Places = (props) => {
         onSortOptionClick={onSortOptionClick}
       />}
       {<OffersList
-        city={city}
         offers={offers}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
