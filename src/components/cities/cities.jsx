@@ -30,7 +30,6 @@ const Cities = (props) => {
         <PlacesWrapped
           offersCount={offersCount}
           city={city}
-          offers={offers}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           sortType={sortType}
@@ -53,21 +52,20 @@ Cities.propTypes = {
   sortType: PropTypes.oneOf(Object.values(SortType)).isRequired,
   onSortOptionClick: PropTypes.func.isRequired,
   currentOffer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.array.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
     }).isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
-    price: PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
     }).isRequired,
-    rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    coords: PropTypes.array.isRequired,
   }),
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,

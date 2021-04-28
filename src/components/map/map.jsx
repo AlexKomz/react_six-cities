@@ -2,7 +2,7 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
-import {ZOOM, Icon} from "../../consts.js";
+import {Icon} from "../../consts.js";
 
 
 export default class Map extends PureComponent {
@@ -38,8 +38,10 @@ export default class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    this._map.remove();
-    this._map = null;
+    if (this._map) {
+      this._map.remove();
+      this._map = null;
+    }
   }
 
   _mapInit() {
@@ -58,17 +60,19 @@ export default class Map extends PureComponent {
       return;
     }
 
+    const {location: cityLocation} = offers[0].city;
+
     const currentId = currentOffer ? currentOffer.id : null;
-    const cityCoords = offers[0].city.coords;
+    const cityCoords = [cityLocation.latitude, cityLocation.longitude];
 
     this._map = leaflet.map(this._mapRef.current, {
       center: cityCoords,
-      zoom: ZOOM,
+      zoom: cityLocation.zoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(cityCoords, ZOOM);
+    this._map.setView(cityCoords, cityLocation.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -77,10 +81,15 @@ export default class Map extends PureComponent {
       .addTo(this._map);
 
     offers.forEach((offer) => {
-      let iconContainer = currentId === offer.id ? this._activeIcon : this._icon;
+      const iconContainer = (currentId === offer.id)
+        ? this._activeIcon
+        : this._icon;
+
+      const {location} = offer;
+      const coords = [location.latitude, location.longitude];
 
       leaflet
-        .marker(offer.coords, {icon: iconContainer})
+        .marker(coords, {icon: iconContainer})
         .addTo(this._map);
     });
   }
@@ -89,20 +98,19 @@ export default class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
   currentOffer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      coords: PropTypes.array.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
     }).isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
-    price: PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
     }).isRequired,
-    rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    coords: PropTypes.array.isRequired,
   }),
 };

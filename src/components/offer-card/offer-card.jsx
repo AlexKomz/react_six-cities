@@ -10,7 +10,7 @@ class OfferCard extends PureComponent {
     super(props);
 
     this.state = {
-      inBookmarks: false,
+      isFavorite: this.props.offer.isFavorite,
     };
   }
 
@@ -21,20 +21,20 @@ class OfferCard extends PureComponent {
       onMouseLeave,
     } = this.props;
 
-    const {inBookmarks} = this.state;
+    const {isFavorite} = this.state;
 
     const {
       isPremium,
-      image,
+      previewImage,
       price,
       rating,
-      name,
+      title,
       type
     } = offer;
 
     const boormarkBtnClasses = classNames({
       "place-card__bookmark-button": true,
-      "place-card__bookmark-button--active": inBookmarks,
+      "place-card__bookmark-button--active": isFavorite,
       "button": true
     });
 
@@ -53,20 +53,20 @@ class OfferCard extends PureComponent {
         )}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src={image.src} width="260" height="200" alt="Place image"/>
+            <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
           </a>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
-              <b className="place-card__price-value">&euro;{price.value}</b>
-              <span className="place-card__price-text">&#47;&nbsp;{price.text}</span>
+              <b className="place-card__price-value">&euro;{price}</b>
+              <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button className={boormarkBtnClasses} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
-              <span className="visually-hidden">{inBookmarks ? `In` : `To`} bookmarks</span>
+              <span className="visually-hidden">{isFavorite ? `In` : `To`} bookmarks</span>
             </button>
           </div>
           <div className="place-card__rating rating">
@@ -80,7 +80,7 @@ class OfferCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">{name}</a>
+            <a href="#">{title}</a>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -93,21 +93,14 @@ OfferCard.propTypes = {
   onMouseEnter: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      coords: PropTypes.array.isRequired,
-    }).isRequired,
+    id: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
-    image: PropTypes.shape({src: PropTypes.string.isRequired}).isRequired,
-    price: PropTypes.shape({
-      value: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    }).isRequired,
-    rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
-    name: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    coords: PropTypes.array.isRequired,
   }).isRequired,
 };
 
