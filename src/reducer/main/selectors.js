@@ -23,10 +23,10 @@ const getSortedOffers = createSelector(
 
       switch (sortType) {
         case SortType.LOW_TO_HIGH:
-          sortedOffers.sort((a, b) => a.price.value - b.price.value);
+          sortedOffers.sort((a, b) => a.price - b.price);
           break;
         case SortType.HIGH_TO_LOW:
-          sortedOffers.sort((a, b) => b.price.value - a.price.value);
+          sortedOffers.sort((a, b) => b.price - a.price);
           break;
         case SortType.TOP_RATED_FIRST:
           sortedOffers.sort((a, b) => b.rating - a.rating);
