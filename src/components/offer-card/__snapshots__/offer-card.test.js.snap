@@ -7,13 +7,6 @@ exports[`Should OfferCard render correctly 1`] = `
   onMouseLeave={[MockFunction]}
 >
   <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
-  <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
@@ -23,7 +16,7 @@ exports[`Should OfferCard render correctly 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
         width="260"
       />
     </a>
@@ -41,13 +34,12 @@ exports[`Should OfferCard render correctly 1`] = `
           className="place-card__price-value"
         >
           €
-          120
+          463
         </b>
         <span
           className="place-card__price-text"
         >
-          / 
-          night
+          / night
         </span>
       </div>
       <button
@@ -97,13 +89,13 @@ exports[`Should OfferCard render correctly 1`] = `
       <a
         href="#"
       >
-        Beautiful &amp; luxurious apartment at great location
+        Nice, cozy, warm big bed apartment
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      hotel
     </p>
   </div>
 </article>

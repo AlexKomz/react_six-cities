@@ -1,58 +1,96 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 
 import Cities from "./cities.jsx";
 
-import {SortType} from "../../consts.js";
+import NameSpace from "../../reducer/name-space.js";
+import {City, SortType} from "../../consts.js";
 
 
-const city = `Amsterdam`;
+const mockStore = configureStore([]);
+
 const offers = [{
-  id: `id1`,
-  city: {
-    name: `Amsterdam`,
-    coords: [52.38333, 4.9],
+  "city": {
+    "name": `Brussels`,
+    "location": {
+      "latitude": 50.846557,
+      "longitude": 4.351697,
+      "zoom": 13
+    }
   },
-  isPremium: true,
-  image: {src: `img/apartment-01.jpg`},
-  price: {
-    value: 120,
-    text: `night`
+  "previewImage": `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg`,
+  "images": [
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/2.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/1.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/5.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/11.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/6.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/17.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/19.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/20.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/15.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/16.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/9.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/12.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/18.jpg`,
+    `https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/4.jpg`
+  ],
+  "title": `Nice, cozy, warm big bed apartment`,
+  "isFavorite": false,
+  "isPremium": false,
+  "rating": 4,
+  "type": `hotel`,
+  "bedrooms": 4,
+  "maxAdults": 7,
+  "price": 463,
+  "goods": [
+    `Baby seat`,
+    `Laptop friendly workspace`,
+    `Fridge`,
+    `Air conditioning`,
+    `Towels`,
+    `Washer`,
+    `Breakfast`
+  ],
+  "host": {
+    "id": 25,
+    "name": `Angelina`,
+    "isPro": true,
+    "avatarUrl": `img/avatar-angelina.jpg`
   },
-  rating: 4,
-  name: `Beautiful &amp; luxurious apartment at great location`,
-  type: `Apartment`,
-  coords: [52.3909553943508, 4.85309666406198]
-}, {
-  id: `id2`,
-  city: {
-    name: `Amsterdam`,
-    coords: [52.38333, 4.9],
+  "description": `I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!`,
+  "location": {
+    "latitude": 50.860557,
+    "longitude": 4.376697,
+    "zoom": 16
   },
-  isPremium: false,
-  image: {src: `img/room.jpg`},
-  price: {
-    value: 80,
-    text: `night`
-  },
-  rating: 4,
-  name: `Wood and stone place`,
-  type: `Private room`,
-  coords: [52.369553943508, 4.85309666406198]
+  "id": 1
 }];
 
 it(`Should Cities render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      offers,
+    },
+    [NameSpace.MAIN]: {
+      sortType: SortType.POPULAR,
+      city: City.PARIS,
+    },
+  });
+
   const tree = renderer
     .create(
-        <Cities
-          city={city}
-          offers={offers}
-          currentOffer={null}
-          onMouseEnter={() => {}}
-          onMouseLeave={() => {}}
-          sortType={SortType.POPULAR}
-          onSortOptionClick={jest.fn()}
-        />
+        <Provider store={store}>
+          <Cities
+            city={City.PARIS}
+            offers={offers}
+            currentOffer={null}
+            onMouseEnter={() => {}}
+            onMouseLeave={() => {}}
+          />
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();
