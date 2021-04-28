@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {Cities} from "../../consts.js";
+import {City} from "../../consts.js";
 
 
 const LocationTabsList = (props) => {
@@ -10,7 +10,7 @@ const LocationTabsList = (props) => {
     onTabClick
   } = props;
 
-  const cities = Object.values(Cities);
+  const cities = Object.values(City);
 
   return (
     <div className="tabs">
