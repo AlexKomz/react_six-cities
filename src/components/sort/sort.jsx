@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {SortType} from "../../consts";
+import {SortType} from "../../const";
 
 
 const Sort = (props) => {

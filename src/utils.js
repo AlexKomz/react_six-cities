@@ -1,4 +1,4 @@
-import {Raiting} from "./consts.js";
+import {Raiting} from "./const.js";
 
 
 const convertRaitingIntoPercent = (raiting) => {

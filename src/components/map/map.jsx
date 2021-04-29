@@ -2,7 +2,7 @@ import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
-import {Icon} from "../../consts.js";
+import {Icon} from "../../const.js";
 
 
 export default class Map extends PureComponent {

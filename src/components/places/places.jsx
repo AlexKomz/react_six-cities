@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Sort from "../sort/sort.jsx";
 import OffersList from "../offers-list/offers-list.jsx";
 
-import {SortType} from "../../consts.js";
+import {SortType} from "../../const.js";
 
 
 const Places = (props) => {

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {ActionCreator} from "../../reducer/main/main.js";
 import {getSortType, getSortedOffers} from "../../reducer/main/selectors.js";
-import {SortType} from "../../consts.js";
+import {SortType} from "../../const.js";
 
 
 const withSort = (Component) => {

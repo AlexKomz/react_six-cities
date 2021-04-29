@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
 import NameSpace from "../name-space.js";
-import {SortType} from "../../consts.js";
+import {SortType} from "../../const.js";
 import {getOffers} from "../data/selectors.js";
 
 

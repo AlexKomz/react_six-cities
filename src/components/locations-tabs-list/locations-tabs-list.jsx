@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {City} from "../../consts.js";
+import {City} from "../../const.js";
 
 
 const LocationTabsList = (props) => {
