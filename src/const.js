@@ -26,7 +26,7 @@ const City = {
 
 const AppRoute = {
   ROOT: `/`,
-  LOGIN: `login`,
+  LOGIN: `/login`,
 };
 
 
