@@ -10,7 +10,6 @@ const Main = (props) => {
 
   return (
     <main className={mainClasses}>
-      <h1 className="visually-hidden">Cities</h1>
       {children}
     </main>
   );
