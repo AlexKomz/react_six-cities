@@ -20,6 +20,9 @@ const Cities = (props) => {
 
   const offersCount = offers.length;
 
+  const {location} = offers[0].city;
+  const centerCoords = [location.latitude, location.longitude];
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -30,10 +33,14 @@ const Cities = (props) => {
           onMouseLeave={onMouseLeave}
         />
         <div className="cities__right-section">
-          {<Map
-            offers={offers}
-            currentOffer={currentOffer}
-          />}
+          <section className="cities__map map">
+            {<Map
+              offers={offers}
+              currentOffer={currentOffer}
+              centerCoords={centerCoords}
+              zoom={location.zoom}
+            />}
+          </section>
         </div>
       </div>
     </div>
