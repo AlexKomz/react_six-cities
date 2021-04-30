@@ -1,10 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 
 import Places from "./places.jsx";
 
-import {SortType} from "../../consts.js";
+import NameSpace from "../../reducer/name-space.js";
+import {SortType, City} from "../../const.js";
 
+
+const mockStore = configureStore([]);
 
 const city = `London`;
 const offers = [{
@@ -66,19 +71,33 @@ const offers = [{
 }];
 
 it(`Should Places render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      offers,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+    },
+    [NameSpace.MAIN]: {
+      city: City.PARIS,
+    },
+  });
+
   const tree = renderer
     .create(
-        <Places
-          offersCount={offers.length}
-          city={city}
-          onMouseEnter={jest.fn()}
-          onMouseLeave={jest.fn()}
-          sortType={SortType.POPULAR}
-          onSortOptionClick={jest.fn()}
-          isSortFormOpened={false}
-          offers={offers}
-          onSortLabelClick={jest.fn()}
-        />
+        <Provider store={store}>
+          <Places
+            offersCount={offers.length}
+            city={city}
+            onMouseEnter={jest.fn()}
+            onMouseLeave={jest.fn()}
+            sortType={SortType.POPULAR}
+            onSortOptionClick={jest.fn()}
+            isSortFormOpened={false}
+            offers={offers}
+            onSortLabelClick={jest.fn()}
+          />
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

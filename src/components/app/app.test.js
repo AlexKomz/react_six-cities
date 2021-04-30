@@ -6,7 +6,7 @@ import configureStore from "redux-mock-store";
 import App from "./app.jsx";
 
 import NameSpace from "../../reducer/name-space.js";
-import {City} from "../../consts.js";
+import {City} from "../../const.js";
 
 
 const mockStore = configureStore([]);
@@ -73,6 +73,9 @@ it(`Should App render correctly with offers`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       offers,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
     },
     [NameSpace.MAIN]: {
       city: City.PARIS,

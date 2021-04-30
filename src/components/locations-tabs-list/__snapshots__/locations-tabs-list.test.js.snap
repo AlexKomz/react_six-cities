@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should LocationList render correctly 1`] = `
+exports[`Should LocationTabsList render correctly 1`] = `
 <div
   className="tabs"
 >

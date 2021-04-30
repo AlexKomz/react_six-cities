@@ -1,91 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Places render correctly 1`] = `
-<section
-  className="cities__places places"
+exports[`Should FavoritesLocation render correctly 1`] = `
+<li
+  className="favorites__locations-items"
 >
-  <h2
-    className="visually-hidden"
-  >
-    Places
-  </h2>
-  <b
-    className="places__found"
-  >
-    1
-     places to stay in 
-    London
-  </b>
-  <form
-    action="#"
-    className="places__sorting"
-    method="get"
-  >
-    <span
-      className="places__sorting-caption"
-    >
-      Sort by
-    </span>
-    <span
-      className="places__sorting-type"
-      onClick={[MockFunction]}
-      tabIndex={0}
-    >
-      Popular
-      <svg
-        className="places__sorting-arrow"
-        height={4}
-        width={7}
-      >
-        <use
-          xlinkHref="#icon-arrow-select"
-        />
-      </svg>
-    </span>
-    <ul
-      className="places__options places__options--custom "
-    >
-      <li
-        className="places__option places__option--active"
-        onClick={[Function]}
-        tabIndex={0}
-      >
-        Popular
-      </li>
-      <li
-        className="places__option "
-        onClick={[Function]}
-        tabIndex={0}
-      >
-        Price: low to high
-      </li>
-      <li
-        className="places__option "
-        onClick={[Function]}
-        tabIndex={0}
-      >
-        Price: high to low
-      </li>
-      <li
-        className="places__option "
-        onClick={[Function]}
-        tabIndex={0}
-      >
-        Top rated first
-      </li>
-    </ul>
-  </form>
   <div
-    className="cities__places-list places__list tabs__content"
+    className="favorites__locations locations locations--current"
+  >
+    <div
+      className="locations__item"
+    >
+      <a
+        className="locations__item-link"
+        href="#"
+      >
+        <span>
+          Paris
+        </span>
+      </a>
+    </div>
+  </div>
+  <div
+    className="favorites__places"
   >
     <article
-      className="cities__place-card place-card"
+      className="favorites__card place-card"
       onClick={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={[MockFunction]}
+      onMouseLeave={[Function]}
     >
       <div
-        className="cities__image-wrapper place-card__image-wrapper"
+        className="favorites__image-wrapper place-card__image-wrapper"
       >
         <a
           href="#"
@@ -93,14 +38,14 @@ exports[`Should Places render correctly 1`] = `
           <img
             alt="Place image"
             className="place-card__image"
-            height={200}
+            height={110}
             src="https://htmlacademy-react-2.appspot.com/six-cities/static/hotel/10.jpg"
-            width={260}
+            width={150}
           />
         </a>
       </div>
       <div
-        className="place-card__info"
+        className="favorites__card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -179,5 +124,5 @@ exports[`Should Places render correctly 1`] = `
       </div>
     </article>
   </div>
-</section>
+</li>
 `;

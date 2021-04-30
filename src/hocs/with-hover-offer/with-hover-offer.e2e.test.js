@@ -4,7 +4,7 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 import withHoverOffer from "./with-hover-offer.js";
 
-import {SortType} from "../../consts.js";
+import {SortType} from "../../const.js";
 
 
 configure({adapter: new Adapter()});

@@ -1,8 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 
 import OfferCard from "./offer-card.jsx";
 
+import NameSpace from "../../reducer/name-space.js";
+import {CardType, City} from "../../const.js";
+
+
+const mockStore = configureStore([]);
 
 const offer = {
   "city": {
@@ -63,14 +70,30 @@ const offer = {
 };
 
 it(`Should OfferCard render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+    },
+    [NameSpace.MAIN]: {
+      city: City.PARIS,
+    },
+  });
+
   const tree = renderer
     .create(
-        <OfferCard
-          key={offer.id}
-          offer={offer}
-          onMouseEnter={jest.fn()}
-          onMouseLeave={jest.fn()}
-        />
+        <Provider store={store}>
+          <OfferCard
+            key={offer.id}
+            offer={offer}
+            cardType={CardType.CITY}
+            imgSize={{
+              width: 260,
+              height: 200,
+            }}
+            onMouseEnter={jest.fn()}
+            onMouseLeave={jest.fn()}
+          />
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

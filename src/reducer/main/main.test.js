@@ -1,5 +1,5 @@
 import {ActionType, ActionCreator, reducer} from "./main.js";
-import {SortType, City} from "../../consts.js";
+import {SortType, City} from "../../const.js";
 
 
 it(`Reducer whithout additional parameters should return initial state`, () => {

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 
 import Sort from "./sort.jsx";
 
-import {SortType} from "../../consts.js";
+import {SortType} from "../../const.js";
 
 
 it(`Should Sort render correctly`, () => {

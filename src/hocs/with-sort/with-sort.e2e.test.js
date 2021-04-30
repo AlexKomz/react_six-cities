@@ -7,7 +7,7 @@ import configureStore from "redux-mock-store";
 import withSort from "./with-sort.js";
 
 import NameSpace from "../../reducer/name-space.js";
-import {SortType, City} from "../../consts.js";
+import {SortType, City} from "../../const.js";
 
 
 const mockStore = configureStore([]);
