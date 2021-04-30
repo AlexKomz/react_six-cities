@@ -27,9 +27,7 @@ export default class Map extends PureComponent {
     this._mapInit();
 
     return (
-      <section className="cities__map map">
-        <div id="map" ref={this._mapRef} style={{height: `100%`}} />
-      </section>
+      <div id="map" ref={this._mapRef} style={{height: `100%`}} />
     );
   }
 
@@ -54,31 +52,38 @@ export default class Map extends PureComponent {
       this._map = null;
     }
 
-    const {offers, currentOffer} = this.props;
+    const {
+      offers,
+      currentOffer,
+      centerCoords,
+      zoom,
+      circle,
+    } = this.props;
 
     if (offers.length === 0) {
       return;
     }
 
-    const {location: cityLocation} = offers[0].city;
-
     const currentId = currentOffer ? currentOffer.id : null;
-    const cityCoords = [cityLocation.latitude, cityLocation.longitude];
 
     this._map = leaflet.map(this._mapRef.current, {
-      center: cityCoords,
-      zoom: cityLocation.zoom,
+      center: centerCoords,
+      zoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(cityCoords, cityLocation.zoom);
+    this._map.setView(centerCoords, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this._map);
+
+    if (circle) {
+      leaflet.circle(centerCoords, circle).addTo(this._map);
+    }
 
     offers.forEach((offer) => {
       const iconContainer = (currentId === offer.id)
@@ -96,6 +101,8 @@ export default class Map extends PureComponent {
 }
 
 Map.propTypes = {
+  centerCoords: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  zoom: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   currentOffer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -112,5 +119,13 @@ Map.propTypes = {
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }).isRequired,
+  }),
+  circle: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+    fillColor: PropTypes.string. isRequired,
+    fillOpacity: PropTypes.oneOf(
+        [...(new Array(10))].map((_, i) => i + 0.1)
+    ).isRequired,
+    radius: PropTypes.number.isRequired,
   }),
 };
