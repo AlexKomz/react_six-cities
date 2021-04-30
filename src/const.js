@@ -27,6 +27,12 @@ const City = {
 const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+};
+
+const CardType = {
+  FAVORITE: `favorites`,
+  CITY: `cities`,
 };
 
 
@@ -36,4 +42,5 @@ export {
   SortType,
   City,
   AppRoute,
+  CardType,
 };
