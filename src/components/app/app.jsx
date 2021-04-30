@@ -12,6 +12,7 @@ import AuthScreen from "../auth-screen/auth-screen.jsx";
 import EmptyScreen from "../empty-screen/empty-screen.jsx";
 import LocationTabsList from "../locations-tabs-list/locations-tabs-list.jsx";
 import Cities from "../cities/cities.jsx";
+import Property from "../property/property.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 
@@ -40,6 +41,11 @@ class App extends PureComponent {
           <Route exact path={AppRoute.LOGIN}>
             {this._renderLoginScreen()}
           </Route>
+          <Route
+            exact
+            path={`${AppRoute.PROPERTY}/:id`}
+            render={(props) => this._renderPropertyScreen(props)}
+          />
           <PrivateRoute
             exact
             path={AppRoute.FAVORITES}
@@ -49,6 +55,42 @@ class App extends PureComponent {
           />
         </Switch>
       </Router>
+    );
+  }
+
+  _renderPropertyScreen(props) {
+    const {
+      authorizationStatus,
+      user,
+      offers,
+    } = this.props;
+
+    const pageClasses = classNames({
+      "page": true,
+    });
+
+    const mainClasses = classNames({
+      "page__main": true,
+      "page__main--property": true,
+    });
+
+    return (
+      <Page
+        pageClasses={pageClasses}
+      >
+        <Header
+          authorizationStatus={authorizationStatus}
+          user={user}
+        />
+        <Main
+          mainClasses={mainClasses}
+        >
+          <Property
+            {...props}
+            offers={offers}
+          />
+        </Main>
+      </Page>
     );
   }
 
