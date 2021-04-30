@@ -1,4 +1,4 @@
-import {Raiting} from "./const.js";
+import {Raiting, Calculations} from "./const.js";
 
 
 const convertRaitingIntoPercent = (raiting) => {
@@ -7,5 +7,18 @@ const convertRaitingIntoPercent = (raiting) => {
 
 const extend = (a, b) => Object.assign({}, a, b);
 
+const getOfferByID = (offers, id) => offers.find((offer) => offer.id === id);
 
-export {convertRaitingIntoPercent, extend};
+const distanceBetweenPointsInMeters = (pointA, pointB) => {
+  return 2 *
+  Math.asin(
+      Math.sqrt(
+          Math.pow(Math.sin((pointB.latitude - pointA.latitude) / 2), 2) +
+            Math.cos(pointA.latitude) * Math.cos(pointB.latitude) *
+            Math.pow(
+                Math.sin(
+                    Math.abs(pointA.longitude - pointB.longitude) / 2), 2))) * Calculations.EARTH_RADIUS;
+};
+
+
+export {convertRaitingIntoPercent, extend, getOfferByID, distanceBetweenPointsInMeters};
