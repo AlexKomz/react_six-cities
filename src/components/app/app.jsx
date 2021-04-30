@@ -27,6 +27,7 @@ import history from "../../history.js";
 
 
 const CitiesWrapped = withHoverOffer(Cities);
+const PropertyWrapped = withHoverOffer(Property);
 
 class App extends PureComponent {
   render() {
@@ -85,7 +86,7 @@ class App extends PureComponent {
         <Main
           mainClasses={mainClasses}
         >
-          <Property
+          <PropertyWrapped
             {...props}
             offers={offers}
           />

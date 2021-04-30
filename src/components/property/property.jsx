@@ -21,11 +21,14 @@ const Property = (props) => {
     offers,
     onFavoriteButtonClick,
     authorizationStatus,
+    currentOffer,
+    onMouseEnter,
+    onMouseLeave,
   } = props;
 
   const id = Number(match.params.id);
 
-  const currentOffer = getOfferByID(offers, id);
+  const selectedOffer = getOfferByID(offers, id);
 
   const {
     images,
@@ -40,10 +43,10 @@ const Property = (props) => {
     goods,
     host,
     description,
-  } = currentOffer;
+  } = selectedOffer;
 
-  const {zoom} = currentOffer.city.location;
-  const {location} = currentOffer;
+  const {zoom} = selectedOffer.city.location;
+  const {location} = selectedOffer;
   const centerCoords = [location.latitude, location.longitude];
 
   const boormarkBtnClasses = classNames({
@@ -94,7 +97,7 @@ const Property = (props) => {
                     return;
                   }
 
-                  onFavoriteButtonClick(extend(currentOffer, {isFavorite: !isFavorite}));
+                  onFavoriteButtonClick(extend(selectedOffer, {isFavorite: !isFavorite}));
                 }}
               >
                 <svg className="property__bookmark-icon" width="31" height="33">
@@ -214,7 +217,7 @@ const Property = (props) => {
         <section className="property__map map">
           {<Map
             offers={nearestOffers}
-            currentOffer={null}
+            currentOffer={currentOffer}
             centerCoords={centerCoords}
             zoom={zoom}
             circle={{
@@ -239,8 +242,8 @@ const Property = (props) => {
                   width: 260,
                   height: 200,
                 }}
-                onMouseEnter={() => {}}
-                onMouseLeave={() => {}}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
               />
             ))}
           </div>
@@ -259,6 +262,24 @@ Property.propTypes = {
   offers: PropTypes.array.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  currentOffer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
