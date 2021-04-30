@@ -28,11 +28,18 @@ const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
+  PROPERTY: `/property`,
 };
 
 const CardType = {
   FAVORITE: `favorites`,
   CITY: `cities`,
+  NEAR_PLACES: `near-places`,
+};
+
+const Calculations = {
+  RADIUS: 2500,
+  EARTH_RADIUS: 6372795,
 };
 
 
@@ -43,4 +50,5 @@ export {
   City,
   AppRoute,
   CardType,
+  Calculations,
 };
