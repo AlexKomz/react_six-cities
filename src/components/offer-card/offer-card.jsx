@@ -24,6 +24,7 @@ class OfferCard extends PureComponent {
     } = this.props;
 
     const {
+      id,
       isPremium,
       isFavorite,
       previewImage,
@@ -42,14 +43,19 @@ class OfferCard extends PureComponent {
     return (
       <article
         className={
-          cardType === CardType.FAVORITE
-            ? cardType + `__card place-card`
-            : cardType + `__place-card place-card`
+          cardType === CardType.CITY
+            ? cardType + `__place-card place-card`
+            : cardType + `__card place-card`
+
         }
         onMouseEnter={() => {
           onMouseEnter(offer);
         }}
         onMouseLeave={onMouseLeave}
+        onClick={(evt) => {
+          evt.preventDefault();
+          history.push(AppRoute.PROPERTY + `/${id}`);
+        }}
       >
         {isPremium && (
           <div className="place-card__mark">
@@ -74,7 +80,9 @@ class OfferCard extends PureComponent {
             <button
               className={boormarkBtnClasses}
               type="button"
-              onClick={() => {
+              onClick={(evt) => {
+                evt.stopPropagation();
+
                 if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
                   history.push(AppRoute.LOGIN);
                   return;
