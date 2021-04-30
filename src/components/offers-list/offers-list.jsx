@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import OfferCard from "../offer-card/offer-card.jsx";
 
+import {CardType} from "../../const.js";
+
 
 const OffersList = (props) => {
   const {
@@ -17,6 +19,11 @@ const OffersList = (props) => {
         <OfferCard
           key={offer.id}
           offer={offer}
+          cardType={CardType.CITY}
+          imgSize={{
+            width: 260,
+            height: 200,
+          }}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
