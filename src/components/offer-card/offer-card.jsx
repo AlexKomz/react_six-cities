@@ -1,30 +1,31 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import {connect} from "react-redux";
 
-import {convertRaitingIntoPercent} from "../../utils";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {ActionCreator} from "../../reducer/data/data.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {convertRaitingIntoPercent, extend} from "../../utils";
+import {CardType, AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 
 class OfferCard extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isFavorite: this.props.offer.isFavorite,
-    };
-  }
-
   render() {
     const {
       offer,
+      cardType,
+      imgSize,
       onMouseEnter,
       onMouseLeave,
+      onFavoriteButtonClick,
+      authorizationStatus,
     } = this.props;
-
-    const {isFavorite} = this.state;
 
     const {
       isPremium,
+      isFavorite,
       previewImage,
       price,
       rating,
@@ -40,7 +41,11 @@ class OfferCard extends PureComponent {
 
     return (
       <article
-        className="cities__place-card place-card"
+        className={
+          cardType === CardType.FAVORITE
+            ? cardType + `__card place-card`
+            : cardType + `__place-card place-card`
+        }
         onMouseEnter={() => {
           onMouseEnter(offer);
         }}
@@ -51,18 +56,33 @@ class OfferCard extends PureComponent {
             <span>Premium</span>
           </div>
         )}
-        <div className="cities__image-wrapper place-card__image-wrapper">
+        <div className={cardType + `__image-wrapper place-card__image-wrapper`}>
           <a href="#">
-            <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+            <img className="place-card__image" src={previewImage} width={imgSize.width} height={imgSize.height} alt="Place image"/>
           </a>
         </div>
-        <div className="place-card__info">
+        <div className={
+          cardType === CardType.FAVORITE
+            ? cardType + `__card__info`
+            : `` + `place-card__info`
+        }>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className={boormarkBtnClasses} type="button">
+            <button
+              className={boormarkBtnClasses}
+              type="button"
+              onClick={() => {
+                if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+                  history.push(AppRoute.LOGIN);
+                  return;
+                }
+
+                onFavoriteButtonClick(extend(offer, {isFavorite: !isFavorite}));
+              }}
+            >
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
@@ -102,7 +122,25 @@ OfferCard.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  imgSize: PropTypes.shape({
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
+  cardType: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+});
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteButtonClick: (offer) => {
+    dispatch(ActionCreator.updateOffers(offer));
+  },
+});
+
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
