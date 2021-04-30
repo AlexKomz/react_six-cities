@@ -32,7 +32,9 @@ const Operation = {
   loadOffers: () => (dispatch, _, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        const offers = camelcaseKeys(response.data);
+        const offers = camelcaseKeys(response.data, {
+          deep: true,
+        });
         dispatch(ActionCreator.loadOffers(offers));
       });
   },
