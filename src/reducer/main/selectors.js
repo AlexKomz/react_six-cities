@@ -37,10 +37,16 @@ const getSortedOffers = createSelector(
     }
 );
 
+const getFavoritedOffers = createSelector(
+    getOffers,
+    (offers) => offers.filter((offer) => offer.isFavorite)
+);
+
 
 export {
   getSortType,
   getCity,
   getFilteredOffers,
   getSortedOffers,
+  getFavoritedOffers,
 };
