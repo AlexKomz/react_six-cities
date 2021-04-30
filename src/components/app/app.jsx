@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Switch, Route, Router} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import classNames from "classnames";
@@ -7,16 +7,19 @@ import classNames from "classnames";
 import Page from "../page/page.jsx";
 import Main from "../main/main.jsx";
 import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 import AuthScreen from "../auth-screen/auth-screen.jsx";
 import EmptyScreen from "../empty-screen/empty-screen.jsx";
 import LocationTabsList from "../locations-tabs-list/locations-tabs-list.jsx";
 import Cities from "../cities/cities.jsx";
+import Favorites from "../favorites/favorites.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 
 import withHoverOffer from "../../hocs/with-hover-offer/with-hover-offer.js";
 
 import {ActionCreator} from "../../reducer/main/main.js";
 import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user.js";
-import {getCity, getFilteredOffers} from "../../reducer/main/selectors.js";
+import {getCity, getFilteredOffers, getFavoritedOffers} from "../../reducer/main/selectors.js";
 import {getAuthorizationStatus, getUser} from "../../reducer/user/selectors.js";
 import {AppRoute} from "../../const.js";
 import history from "../../history.js";
@@ -37,8 +40,61 @@ class App extends PureComponent {
           <Route exact path={AppRoute.LOGIN}>
             {this._renderLoginScreen()}
           </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => {
+              return this._renderFavoritesScreen();
+            }}
+          />
         </Switch>
       </Router>
+    );
+  }
+
+  _renderFavoritesScreen() {
+    const {
+      authorizationStatus,
+      user,
+      favoriteOffers,
+    } = this.props;
+    const offersCount = favoriteOffers.length;
+
+    const pageClasses = classNames({
+      "page": true,
+      "page--favorites-empty": offersCount === 0,
+    });
+
+    const mainClasses = classNames({
+      "page__main": true,
+      "page__main--favorites": true,
+      "page__main--favorites-empty": offersCount === 0,
+    });
+
+    const footerClasses = classNames({
+      "footer": true,
+      "container": offersCount > 0,
+    });
+
+    return (
+      <Page
+        pageClasses={pageClasses}
+      >
+        <Header
+          authorizationStatus={authorizationStatus}
+          user={user}
+        />
+        <Main
+          mainClasses={mainClasses}
+        >
+          <Favorites
+            offers={favoriteOffers}
+          />
+        </Main>
+        <Footer
+          footerClasses={footerClasses}
+        />
+      </Page>
     );
   }
 
@@ -51,7 +107,7 @@ class App extends PureComponent {
     } = this.props;
 
     if (authorizationStatus === AuthorizationStatus.AUTH) {
-      return this._renderIndexScreen();
+      return <Redirect to={AppRoute.FAVORITES} />;
     }
 
     const pageClasses = classNames({
@@ -157,6 +213,7 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
+  favoriteOffers: PropTypes.array.isRequired,
   onTabClick: PropTypes.func.isRequired,
 };
 
@@ -165,6 +222,7 @@ const mapStateToProps = (state) => ({
   user: getUser(state),
   city: getCity(state),
   offers: getFilteredOffers(state),
+  favoriteOffers: getFavoritedOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
