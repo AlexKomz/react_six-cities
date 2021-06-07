@@ -6,7 +6,7 @@ import configureStore from "redux-mock-store";
 import OffersList from "./offers-list.jsx";
 
 import NameSpace from "../../reducer/name-space.js";
-import {City, CardType} from "../../const.js";
+import {City} from "../../const.js";
 
 
 const mockStore = configureStore([]);

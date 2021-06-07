@@ -11,7 +11,6 @@ import {Provider} from "react-redux";
 
 const mockStore = configureStore([]);
 
-
 const offers = [{
   "city": {
     "name": `Brussels`,
@@ -87,10 +86,12 @@ it(`Should Property render correctly`, () => {
     .create(
         <Provider store={store}>
           <Property
-            match={{params: {id: 1}}}
+            match={{params: {id: `1`}}}
             offers={offers}
             onFavoriteButtonClick={() => {}}
             authorizationStatus={`NO_AUTH`}
+            onMouseEnter={() => {}}
+            onMouseLeave={() => {}}
           />
         </Provider>
     ).toJSON();

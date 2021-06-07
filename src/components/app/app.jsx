@@ -50,9 +50,7 @@ class App extends PureComponent {
           <PrivateRoute
             exact
             path={AppRoute.FAVORITES}
-            render={() => {
-              return this._renderFavoritesScreen();
-            }}
+            render={() => this._renderFavoritesScreen()}
           />
         </Switch>
       </Router>
@@ -64,6 +62,7 @@ class App extends PureComponent {
       authorizationStatus,
       user,
       offers,
+      city,
     } = this.props;
 
     const pageClasses = classNames({
@@ -88,6 +87,7 @@ class App extends PureComponent {
         >
           <PropertyWrapped
             {...props}
+            city={city}
             offers={offers}
           />
         </Main>

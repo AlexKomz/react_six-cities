@@ -124,7 +124,7 @@ Map.propTypes = {
     color: PropTypes.string.isRequired,
     fillColor: PropTypes.string. isRequired,
     fillOpacity: PropTypes.oneOf(
-        [...(new Array(10))].map((_, i) => i + 0.1)
+        new Array(10).fill(0).map((_, i) => +(i / 10 + 0.1).toFixed(1))
     ).isRequired,
     radius: PropTypes.number.isRequired,
   }),
