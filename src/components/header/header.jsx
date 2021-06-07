@@ -18,6 +18,9 @@ const Header = (props) => {
   const userName = (isAuthorized && user)
     ? user.email
     : `Sign in`;
+  const avatarComponent = (isAuthorized && user)
+    ? <img src={`https://htmlacademy-react-2.appspot.com/six-cities${user.avatarUrl}`} alt="User avatar" />
+    : ``;
 
   return (
     <header className="header">
@@ -39,6 +42,7 @@ const Header = (props) => {
                   to={AppRoute.LOGIN}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
+                    {avatarComponent}
                   </div>
                   <span className={loginClasses}>{userName}</span>
                 </Link>
@@ -55,6 +59,7 @@ Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
   }),
 };
 

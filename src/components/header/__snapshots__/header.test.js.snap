@@ -43,7 +43,9 @@ exports[`Should Header render correctly 1`] = `
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
-              />
+              >
+                
+              </div>
               <span
                 className="header__user-name user__name"
               >
